@@ -10,10 +10,7 @@ here I am giving the backend file of the website and N8N Workflow file
 In the N8N you need to add Your the gemini API KEY to test the workflow
 
 And after activate the workflow you need to copy the production URL and paste it in the backend file
-
-<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-<script type="module">
-	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+add it in this line
 
 	createChat({
 		webhookUrl: 'YOUR_PRODUCTION_WEBHOOK_URL' 
