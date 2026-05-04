@@ -10,7 +10,7 @@ here I am giving the backend file of the website and N8N Workflow file
 In the N8N you need to add Your the gemini API KEY to test the workflow
 
 And after activate the workflow you need to copy the production URL and paste it in the backend file
-add it in this line
+add it in this line 'YOUR_PRODUCTION_WEBHOOK_URL'
 
 	createChat({
 		webhookUrl: 'YOUR_PRODUCTION_WEBHOOK_URL' 
