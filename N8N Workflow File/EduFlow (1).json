@@ -1,0 +1,284 @@
+{
+  "name": "EduFlow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -336,
+        -32
+      ],
+      "id": "40d7e0ae-6ee9-4435-b41f-7dfa161b1532",
+      "name": "When chat message received",
+      "webhookId": "5f1e5245-8acc-4861-abf1-443e43f7f226"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an AI-powered Enquiry Assistant for an educational institution named \"EduFlow\".\n\nYour role is to interact with potential students, answer their questions, and guide them toward enrolling in suitable courses.\n\nwhen a user sends their first message (like hi, hello) , reply with:\n\n\"Welcome to EduFlow\n\nHow Can I Help You Today ?\"\n\nEduFlow offers the following courses:\n\n* Data Science Bootcamp\n* Full Stack Development\n* Python for Beginners\n* Data Analytics with Excel & Power BI\n\nYour responsibilities:\n\n1. Greet users in a friendly and professional manner.\n2. Understand the user’s needs, interests, and background.\n3. Suggest the most relevant course(s) based on their goals.\n4. Provide clear and concise information about the courses when asked.\n5. Ask for important details such as name, phone number, email, and preferred course to capture leads.\n6. Encourage users to take the next step (enroll, request a callback, or get more details).\n7. Handle multiple types of queries politely and professionally.\n\nGuidelines:\n\n* Keep responses simple, clear, and helpful.\n* Be conversational, not robotic.\n* Do not provide incorrect or made-up information.\n* If unsure, politely ask follow-up questions.\n* Always aim to convert enquiries into leads.\n\nYour tone should be helpful, friendly, and professional at all times."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -128,
+        -32
+      ],
+      "id": "b4aff30c-ed63-4a89-b42c-a248ad4f9d06",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        -272,
+        176
+      ],
+      "id": "d0cd782a-ff7e-4b9c-8b61-7a1a5bb679c9",
+      "name": "Google Gemini Chat Model"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -128,
+        176
+      ],
+      "id": "3aaff7be-8881-4666-bbda-b4599a6f744f",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU",
+          "mode": "list",
+          "cachedResultName": "student enquiry",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Course_details",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        160,
+        240
+      ],
+      "id": "6c41fc30-7611-44dd-8ef9-365eddc87dc1",
+      "name": "Get Course details",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Zsm3EFmUej7ggOd6",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU",
+          "mode": "list",
+          "cachedResultName": "student enquiry",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1577592265,
+          "mode": "list",
+          "cachedResultName": "FAQs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU/edit#gid=1577592265"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        288,
+        288
+      ],
+      "id": "348a9f4d-a456-40c4-bf11-5e9b90e8fadb",
+      "name": "Get FAQs",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Zsm3EFmUej7ggOd6",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU",
+          "mode": "list",
+          "cachedResultName": "student enquiry",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1332615141,
+          "mode": "list",
+          "cachedResultName": "General FAQs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU/edit#gid=1332615141"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        336
+      ],
+      "id": "8ba1585c-fcf2-49e2-b163-2bcda79a7bc2",
+      "name": "Get General FAQs",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Zsm3EFmUej7ggOd6",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU",
+          "mode": "list",
+          "cachedResultName": "student enquiry",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1609134259,
+          "mode": "list",
+          "cachedResultName": "Course",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1owvPQveGWASTidzz-yH9BNtFvrECG4UaLsK8Ob7ufMU/edit#gid=1609134259"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        32,
+        176
+      ],
+      "id": "45215536-8d66-4a59-8eaa-6ef557b86605",
+      "name": "Get Course",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Zsm3EFmUej7ggOd6",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Course details": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get FAQs": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get General FAQs": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Course": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "ac352aa1-242d-4d9a-8db9-f5e4014ca036",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f9738be857c5cf2b401eb01bf8aaac9e9eb854a346c88faf04c11b2519b843ed"
+  },
+  "id": "NUSaZmF8dA8cpWx9",
+  "tags": []
+}
